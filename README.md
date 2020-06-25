@@ -18,11 +18,11 @@ https://www.python.org/downloads/
 
 ```bash
 # clone repo
-git pull https://github.com/getlinksc/scrape_google.git
-# install requirements
+git clone https://github.com/getlinksc/scrape_google.git
+# install requirements after changing directory to scrape_google
 pip install -r requirements.txt
 # modify query in search.py and run script
-python search.py
+python writeToExcel.py
 ```
 
 * [Python3](https://www.python.org/) - Python is a programming language that lets you work quickly
