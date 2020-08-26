@@ -9,7 +9,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 
-UPLOAD_DIRECTORY = "../app_uploaded_files"
+UPLOAD_DIRECTORY = "./app_uploaded_files"
 
 if not os.path.exists(UPLOAD_DIRECTORY):
     os.makedirs(UPLOAD_DIRECTORY)
@@ -90,7 +90,7 @@ def update_output(uploaded_filenames, uploaded_file_contents):
     if uploaded_filenames is not None and uploaded_file_contents is not None:
         for name, data in zip(uploaded_filenames, uploaded_file_contents):
             save_file(name, data)
-            os.system('python ../writeToExcel.py ' + UPLOAD_DIRECTORY + '/' + name)
+            os.system('python writeToExcel.py ' + UPLOAD_DIRECTORY + '/' + name)
             
 
     files = uploaded_files()
