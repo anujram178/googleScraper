@@ -1,9 +1,14 @@
 import openpyxl
 from pathlib import Path
-from search import *
+import search 
+import sys
 
 # setting path
-xlsx_file = Path(Path.home(), 'Documents', 'GitRepos', 'googleScraper', 'Govt_Units_2017_Final.xlsx')
+# S = Search()
+helper = search.Search()
+xlsx_file = Path(sys.argv[1])
+print(sys.argv[1])
+print(xlsx_file)
 
 # read file
 wb_obj = openpyxl.load_workbook(xlsx_file) 
@@ -12,17 +17,18 @@ wb_obj = openpyxl.load_workbook(xlsx_file)
 wsheet = wb_obj.active
 
 
+
 print(wsheet.max_row, wsheet.max_column)
 
 rowNumber = 0
-for row in wsheet.iter_rows(max_row=6):
+for row in wsheet.iter_rows(max_row=wsheet.max_row):
 	rowNumber += 1
 	if rowNumber != 1:
 		nameCell = 'B' + str(rowNumber)
 		stateCell = 'G' + str(rowNumber)
 		googleQuery = wsheet[nameCell].value.lower() + ' ' +  wsheet[stateCell].value.lower()
-		results = scrapeResults(googleQuery)
-		urlDict = findUrl(results)
+		results = helper.scrapeResults(googleQuery)
+		urlDict = helper.findUrl(results)
 		webAddressCell = 'J' + str(rowNumber)
 		if urlDict['exists'] == True:
 			wsheet[webAddressCell] = urlDict['link']
